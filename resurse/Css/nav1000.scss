@@ -1,0 +1,77 @@
+// =======================
+// Variabile SASS
+// =======================
+$bg-nav: #2c3e50;
+$color-link: #ecf0f1;
+$color-hover: #e67e22;
+$padding: 15px;
+$font-size: 16px;
+$submenu-bg: #34495e;
+
+// =======================
+// Mixin pentru linkuri
+// =======================
+@mixin link-style($col) {
+  color: $col;
+  padding: $padding;
+  text-decoration: none;
+  display: block;
+}
+
+// =======================
+// Meniu principal
+// =======================
+nav {
+  background-color: $bg-nav;
+  font-size: $font-size;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+
+    li {
+      position: relative;
+
+      a {
+        @include link-style($color-link);
+
+        &:hover {
+          background-color: $color-hover;
+        }
+      }
+
+      // Submeniuri ascunse inițial
+      ul {
+        position: absolute;
+        display: none;
+        background-color: $submenu-bg;
+        min-width: 200px;
+        flex-direction: column;
+        z-index: 10;
+
+        li {
+          a {
+            padding: 10px;
+            font-size: $font-size;
+          }
+        }
+      }
+
+      // La hover, afișăm submeniul
+      &:hover > ul {
+        display: flex;
+      }
+    }
+  }
+}
+
+// =======================
+// Submeniuri colorate diferit cu @for
+// =======================
+@for $i from 1 through 5 {
+  nav ul > li:nth-child(#{$i}) {
+    background-color: lighten($bg-nav, $i * 2%);
+  }
+}
