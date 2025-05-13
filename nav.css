@@ -1,0 +1,528 @@
+:root {
+    --culoare-primara: #3498db; 
+    --culoare-secundara: #2ecc71; 
+    --culoare-accent: #e74c3c; 
+    --culoare-text: #333; 
+    --culoare-background: #d4ccf8; 
+    --border-color: #ddd;
+}
+
+body {
+    background-color: var(--culoare-background);
+    color: var(--culoare-text);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h2, h3 {
+    color: var(--culoare-primara);
+}
+
+a {
+    color: var(--culoare-accent);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--culoare-secundara);
+}
+
+header, footer {
+    background: var(--culoare-primara);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: var(--culoare-secundara);
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    font-weight: bold;
+}
+
+footer {
+    padding: 10px;
+    margin-top: 20px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+
+.box {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Stil pentru taburi */
+.taburi-iframe {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adăugăm spațiu între taburi */
+    margin-bottom: -1px; /* Suprapunem taburile peste linia containerului */
+}
+
+.taburi-iframe a {
+    padding: 10px 20px;
+    background-color: white; /* Fundal alb pentru taburi */
+    color: black; /* Text negru */
+    border: 1px solid #006666; /* Bordură verde închis */
+    border-bottom: none; /* Eliminăm bordura de jos */
+    border-radius: 5px 5px 0 0; /* Colțuri rotunjite doar sus */
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.taburi-iframe a:hover {
+    background-color: #fce4e4; /* Fundal deschis la hover */
+    color: black;
+    border-color: #e74c3c; /* Bordură roșie */
+    box-shadow: 0 0 8px #e74c3c; /* Glow roșu subtil pe margini */
+}
+
+.taburi-iframe a.active {
+    background-color: white; /* Fundal complet alb pentru tabul activ */
+    color: black;
+    font-weight: bold;
+    border-color: #e74c3c; /* Bordură roșie */
+    box-shadow: 0 0 8px #e74c3c; /* Glow roșu subtil pe margini */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Tranziție lină */
+}
+
+
+
+/* Stil pentru containerul iframe */
+.container-iframe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 7px solid  #e74c3c; /* Bordură verde închis mai groasă */
+    border-radius: 0 0 5px 5px; /* Colțuri rotunjite doar jos */
+    overflow: hidden; /* Ascundem marginile */
+    margin-top: 0; /* Eliminăm spațiul dintre taburi și container */
+    width: 100%; /* Asigurăm alinierea completă */
+    max-width: 600px; /* Lățime maximă */
+    background-color: white; /* Fundal alb pentru container */
+}
+
+iframe {
+    width: 100%;
+    height: 315px;
+    border: none; /* Eliminăm bordura implicită */
+}
+
+/*6*/
+.tabel-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+caption {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+thead th {
+    border-width: 2px;
+}
+
+tbody tr {
+    height: 70px; /* Setăm o înălțime fixă pentru rânduri */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: var(--culoare-secundara); 
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--culoare-primara); 
+    color: white;
+}
+
+tbody tr:hover {
+    background-color: var(--culoare-accent); /* Schimbă culoarea de fundal */
+    color: white; /* Schimbă culoarea textului */
+    font-size: 120%; /* Crește dimensiunea fontului */
+    transition: background-color 0.75s, font-size 0.75s; /* Tranziție lină */
+}
+
+tfoot td {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+    .tabel-container {
+        overflow-x: scroll;
+    }
+}
+
+
+/*7*/
+#BacktoTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #d4ccf8;
+    border: none;
+    border-radius: 25px; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Triunghi simplu */
+#BacktoTop::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 20px solid rgb(255, 4, 4); /* Culoarea triunghiului */
+    position: absolute;
+}
+
+/* Tooltip la hover */
+#BacktoTop::after {
+    content: "Inapoi sus";
+    position: absolute;
+    bottom: 60px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Efect la hover */
+#BacktoTop:hover {
+    background-color: #d4ccf8;
+    transform: translateY(-5px);
+}
+
+#BacktoTop:hover::after {
+    opacity: 1;
+}
+
+/*ex3*/
+:root {
+    --spatiere-laterala: 5vw;
+    --spatiere-mica: 2vw;
+}
+
+body {
+    padding-left: var(--spatiere-laterala);
+    padding-right: var(--spatiere-laterala);
+}
+
+/* Pe ecrane mai mici, reducem spațierea */
+@media (max-width: 768px) {
+    body {
+        padding-left: var(--spatiere-mica);
+        padding-right: var(--spatiere-mica);
+    }
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Spațiere mare pe ecrane mari */
+}
+
+@media (max-width: 1024px) {
+    main {
+        gap: 15px; /* Scădem pe ecran mediu */
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+        gap: 10px; /* Minim pe ecran mic */
+    }
+}
+
+
+header, footer, .box {
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    border-radius: 10px;
+}
+
+.box {
+    border: 2px solid var(--border-color);
+}
+
+:root {
+    --padding-standard: 20px;
+}
+
+header, footer, .box {
+    padding: var(--padding-standard);
+}
+
+img, iframe {
+    width: 100%;
+    max-width: 600px;
+    min-width: 200px;
+}
+
+/*--------------*/
+/* Adaugă aceste reguli la CSS-ul existent */
+
+:root {
+    /* Culorile existente rămân */
+    --spatiere-laterala: 5vw;
+    --spatiere-mica: 2vw;
+    /* Adăugăm variabile pentru cerința (a) */
+    --spatiere-pagina-mare: 30px;
+    --spatiere-pagina-medie: 20px;
+    --spatiere-pagina-mica: 10px;
+    /* Variabile pentru cerința (b) */
+    --grid-gap-mare: 20px;
+    --grid-gap-medie: 15px;
+    --grid-gap-mica: 10px;
+    /* Variabile pentru padding text - cerința (d) */
+    --padding-text: 15px;
+}
+
+/* Cerința (a) - Spațiere pe laterale */
+body {
+    padding-left: var(--spatiere-laterala);
+    padding-right: var(--spatiere-laterala);
+    /* Actualizăm pentru cerința (a) */
+    --spatiere-pagina: var(--spatiere-pagina-mare);
+}
+
+/* Cerința (b) - Grid gap */
+main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--grid-gap-mare);
+}
+
+/* Cerința (c) - Izolare vizuală a zonelor cu 3 efecte */
+header {
+    background-color: var(--culoare-primara);
+    border-bottom: 3px solid var(--culoare-accent);
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+footer {
+    background-color: var(--culoare-secundara);
+    border-top: 3px solid var(--culoare-accent);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+}
+
+.box {
+    background-color: white;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Cerința (d) - Padding egal pentru text */
+header, footer, .box, section {
+    padding: var(--padding-text);
+}
+
+/* Cerința (e) - Elemente media responsive */
+img, iframe, embed {
+    width: 100%;
+    max-width: 600px;
+    min-width: 200px;
+}
+
+/* Media queries pentru cerințele (a) și (b) */
+@media screen and (max-width: 1200px) {
+    body {
+        --spatiere-pagina: var(--spatiere-pagina-medie);
+    }
+    main {
+        gap: var(--grid-gap-medie);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        --spatiere-pagina: var(--spatiere-pagina-mica);
+        padding-left: var(--spatiere-mica);
+        padding-right: var(--spatiere-mica);
+    }
+    main {
+        grid-template-columns: 1fr;
+        gap: var(--grid-gap-mica);
+    }
+}
+
+/* Adăugăm cerința cu font extern și iconuri */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+/* Aplicăm fontul extern undeva relevant, de exemplu pe titlul principal */
+header h1 {
+    font-family: 'Pacifico', cursive;
+}
+.header-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.animated-icon {
+    animation: bounce 2s infinite;
+}
+
+/*-----------grid*/
+
+:root {
+    --culoare-primara: #3498db;
+    --culoare-secundara: #2ecc71;
+    --culoare-accent: #e74c3c;
+    --culoare-text: #333;
+    --culoare-background: #d4ccf8;
+    --border-color: #ddd;
+    --spatiere-mare: 30px;
+    --spatiere-medie: 20px;
+    --spatiere-mica: 10px;
+}
+
+/* Structura principala */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--culoare-background);
+    color: var(--culoare-text);
+    display: grid;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    grid-area: header;
+    background-color: var(--culoare-primara);
+    padding: var(--spatiere-mare);
+    text-align: center;
+    color: white;
+}
+
+/* Main - Grid Layout */
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        "zona5 zona6 zona7"
+        "zona3 zona2 zona2"
+        "zona4 zona2 zona2";
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.zona {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.zona2 {
+    grid-area: zona2;
+    height: 100%;
+}
+
+.zona3, .zona4 {
+    height: fit-content;
+}
+
+.tabel-container {
+    height: 100%;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-areas:
+            "zona5"
+            "zona6"
+            "zona7"
+            "zona3"
+            "zona4"
+            "zona2";
+        grid-template-columns: 1fr;
+    }
+}
+
