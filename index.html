@@ -8,6 +8,7 @@
         <meta name="description" content="Informatii despre pisici: rase, ingrijire, nutritie si comportament. Descopera tot ce trebuie sa stii despre aceste feline minunate!">
         <meta name="author" content="Cristian"> 
         <link rel="stylesheet" href="nav.css">
+        <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="icon" type="image/png" href="./resurse/imagini/favicon/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="./resurse/imagini/favicon/favicon.svg" />
@@ -32,15 +33,34 @@
                 </picture>
                 <figcaption>O pisica draguta.</figcaption>
             </figure>           
-            <nav>
-                <ul>
-                    <li><a href="#sectiune1">Ingrijirea pisicilor</a></li>
-                    <li><a href="#sectiune2">Rase de pisici</a></li>
-                    <li><a href="https://www.purina.ro/articole/pisica/ghid-hranire/cum-mentii-o-greutate-corecta" target="_blank">Resurse externe</a></li>
-                    <li><a href="https://petscats.ro/cele-mai-afectuoase-si-sociabile-rase-de-pisici-pe-care-sa-le-tii-in-casa-ofera-multa-dragoste/" target="_blank">Resurse externe(1)</a></li>
-                    <li><a href="https://spca.bc.ca/wp-content/uploads/cat-care-guide.pdf" target="_blank">Resurse externe(2)</a></li>
-                </ul>
-            </nav>
+            <nav class="dropdown-nav">
+  <ul>
+    <li class="has-submenu">
+      <a href="#">Pagini site</a>
+      <ul class="submenu">
+        <li class="has-submenu">
+          <a href="#">Galerie</a>
+          <ul class="submenu submenu-right">
+            <li><a href="galerie-statica.html">Galerie statică</a></li>
+            <li><a href="galerie-dinamica.html">Galerie dinamică</a></li>
+          </ul>
+        </li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="despre.html">Despre</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu">
+      <a href="#">Secțiuni pagină</a>
+      <ul class="submenu">
+        <li><a href="#sectiune1">Ingrijirea pisicilor</a></li>
+        <li><a href="#sectiune2">Rase de pisici</a></li>
+        <li><a href="#zona7">Întrebări frecvente</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
         </header>
 
         <main class="grid-container">
@@ -153,9 +173,20 @@
                 <li><a href="tel:+40123456789">+40 123 456 789</a></li>
                 <li><a href="mailto:info@pisici.ro">info@pisici.ro</a></li>
                 <li><a href="https://www.google.com/maps?q=Facultatea+de+Matematica+si+Informatica" target="_blank">Adresa noastra</a></li>
+                <img src="./resurse/imagini/pin-mapa.png" usemap="#mapaFMI" alt="Locație" width="1" height="1" style="display: none;">
+                <map name="mapaFMI">
+                <area shape="rect" coords="0,0,1,1"
+                        href="https://www.google.com/maps?q=Facultatea+de+Matematica+si+Informatica"
+                        alt="Facultatea de Matematică și Informatică" target="_blank">
+                </map>
+
+
+
                 <li><a href="https://api.whatsapp.com/send?phone=40123456789" target="_blank">Chat pe WhatsApp</a></li>
             </ul>
             <p>&copy; <time datetime="2025-03-16">2025</time> Copyright.</p>
+
+             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.915308571453!2d26.102855315666892!3d44.43759527910162!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff5e7aaaaab1%3A0x57a4e182c4f97c0d!2sFacultatea%20de%20Matematic%C4%83%20%C8%99i%20Informatic%C4%83!5e0!3m2!1sro!2sro!4v1651234567890!5m2!1sro!2sro" width="600" height="450" style="border:0;" allowfullscreen></iframe>
         </footer>
 
         <button id="BacktoTop" onclick="scrollToTop()">&#8679;</button>
@@ -177,5 +208,7 @@
                 window.scrollTo({ top: 0, behavior: "smooth" });
             }
         </script>
+
+        
     </body>
 </html>
