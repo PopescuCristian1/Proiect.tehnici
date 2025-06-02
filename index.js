@@ -2,6 +2,88 @@ const sharp = require("sharp");
 const fs = require("fs");
 const express = require("express");
 const path = require("path");
+const sass = require("sass");
+
+globalThis.folderScss = path.join(__dirname, "resurse", "scss");
+globalThis.folderCss = path.join(__dirname, "resurse", "css");
+
+function compileazaScss(caleScss, caleCss) {
+    if (!path.isAbsolute(caleScss)) {
+        caleScss = path.join(globalThis.folderScss, caleScss);
+    }
+
+    if (!caleCss) {
+        const numeFisier = path.basename(caleScss, ".scss") + ".css";
+        caleCss = path.join(globalThis.folderCss, numeFisier);
+    } else if (!path.isAbsolute(caleCss)) {
+        caleCss = path.join(globalThis.folderCss, caleCss);
+    }
+
+    if (fs.existsSync(caleCss)) {
+        try {
+            const caleRelativaCss = path.relative(globalThis.folderCss, caleCss); // ex: "stil.css"
+            const caleBackup = path.join(__dirname, "backup", "resurse", "css", caleRelativaCss);
+            const dirBackup = path.dirname(caleBackup);
+
+            if (!fs.existsSync(dirBackup)) {
+                fs.mkdirSync(dirBackup, { recursive: true });
+            }
+
+            fs.copyFileSync(caleCss, caleBackup);
+            console.log(`✔ Fișier backup salvat: ${caleBackup}`);
+        } catch (err) {
+            console.error(`❌ Eroare la salvare backup pentru ${caleCss}:`, err.message);
+        }
+    }
+
+    try {
+        const rezultat = sass.compile(caleScss, {
+  style: "expanded",
+  loadPaths: ["node_modules"]
+});
+
+        fs.writeFileSync(caleCss, rezultat.css);
+        console.log(`✔ Fișier compilat: ${caleScss} → ${caleCss}`);
+    } catch (err) {
+        console.error("❌ Eroare la compilare SCSS:", err.message);
+    }
+}
+
+function compileazaToateScss() {
+    fs.readdir(globalThis.folderScss, (err, fisiere) => {
+        if (err) {
+            console.error("❌ Eroare la citirea folderului SCSS:", err.message);
+            return;
+        }
+
+        for (let fisier of fisiere) {
+            if (path.extname(fisier) === ".scss") {
+                compileazaScss(fisier);
+            }
+        }
+    });
+}
+
+compileazaToateScss();
+
+fs.watch(globalThis.folderScss, (eventType, filename) => {
+    if (filename && path.extname(filename) === ".scss") {
+        console.log(`🔁 Detectată modificare SCSS: ${filename}`);
+        compileazaScss(filename);
+    }
+});
+
+
+const foldereCreate = [
+    path.join(__dirname, "temp"),
+    path.join(__dirname, "backup", "resurse", "css")  
+];
+
+for (let folder of foldereCreate) {
+    if (!fs.existsSync(folder)) {
+        fs.mkdirSync(folder, { recursive: true });
+    }
+}
 
 function genereazaImaginiRedimensionate(imagineNume, caleFolder) {
   const caleOriginala = path.join(__dirname, "resurse", "imagini", "galerie", imagineNume);
@@ -160,7 +242,6 @@ app.use("/resurse/imagini/galerie/small", express.static(path.join(__dirname, "r
 app.use("/resurse/imagini/galerie/medium", express.static(path.join(__dirname, "resurse", "imagini", "galerie", "medium")));
 
 
-
 app.get("/*", function (req, res) {
   let numePagina = req.url.substring(1);
   if (numePagina === "") numePagina = "index";
@@ -180,7 +261,6 @@ app.get("/*", function (req, res) {
     }
   });
 });
-
 
 
 app.listen(8080, () => {
