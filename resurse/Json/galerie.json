@@ -1,0 +1,117 @@
+{
+  "cale_galerie": "resurse/imagini/galerie/",
+  "imagini": [
+    {
+      "fisier_imagine": "pisica1.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica2.jpg",
+      "nume_poză": "Pisică jucăușă",
+      "continut_alternativ": "Pisică cu jucărie",
+      "descriere_poză": "Pisica se joacă cu o minge",
+      "intervale": [["marți", "vineri"]]
+    },
+    {
+      "fisier_imagine": "pisica3.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica4.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica5.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica6.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica7.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica8.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica9.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica10.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica11.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica12.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica13.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica14.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"], ["sâmbătă", "duminică"]]
+    },
+    {
+      "fisier_imagine": "pisica15.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"]]
+    },
+    {
+      "fisier_imagine": "pisica16.jpg",
+      "nume_poză": "Pisică relaxată",
+      "continut_alternativ": "Pisică întinsă pe canapea",
+      "descriere_poză": "Pisica se odihnește în lumină caldă",
+      "intervale": [["luni", "miercuri"]]
+    }
+  ]
+}

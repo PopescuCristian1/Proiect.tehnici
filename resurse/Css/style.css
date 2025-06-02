@@ -1,0 +1,180 @@
+/* MENIU PRINCIPAL */
+.dropdown-nav > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-color: #007acc;
+  justify-content: center;
+}
+
+.dropdown-nav li {
+  position: relative;
+}
+
+.dropdown-nav > ul > li > a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Submeniuri — ascunse inițial */
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #28a745;
+  min-width: 180px;
+  z-index: 1000;
+}
+
+/* Sub-submeniuri (ex: Galerie → Statică/Dinamică) */
+.submenu-right {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: #28a745;
+  min-width: 180px;
+  z-index: 1000;
+}
+
+/* Fiecare element din submenu */
+.submenu li {
+  position: relative;
+}
+
+.submenu li a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: white;
+  white-space: nowrap;
+  background-color: #28a745;
+}
+
+.submenu li a:hover {
+  background-color: #218838;
+}
+
+.has-submenu:hover > .submenu {
+  display: block;
+}
+
+.submenu li.has-submenu:hover > .submenu-right {
+  display: block;
+}
+
+tfoot td {
+    background-color: var(--c3); 
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+}
+
+tbody tr {
+    height: 70px;
+    transition: none;
+}
+
+tbody td {
+    position: relative;
+    overflow: visible;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 10px 15px;
+}
+
+tbody td > * {
+    display: inline-block;
+    transition: font-size 0.3s ease;
+    transform-origin: left center; 
+}
+
+tbody tr:hover td > * {
+    font-size: 120%; 
+    transform: none !important; 
+    padding: 0; 
+    margin: 0; 
+}
+
+video::cue {
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  text-align: left;
+}
+
+/* animatie link, efect*/
+
+:root {
+  --link-visited-color: #7a3e9d;
+  --link-hover-symbol-color: red;
+  --link-active-border-color: #3e8e41;
+}
+
+a:visited {
+  color: var(--link-visited-color);
+}
+
+a[href^="http"]:not([href*="pisici.ro"]):not([href^="mailto"]):not([href^="tel"])::before {
+  content: "⮳";
+  font-size: 1.2em;
+  margin-right: 0.3em;
+  vertical-align: middle;
+  color: inherit;
+  position: relative;
+  z-index: 1;
+}
+
+a[href^="http"]:hover:before {
+  color: var(--link-hover-symbol-color);
+}
+
+a.internal-link {
+  position: relative;
+  display: inline-block;
+  padding: 0.4em 0.6em;
+  text-decoration: none;
+  z-index: 0; 
+  transition: background-size 0.7s ease-in-out;
+  background-image: radial-gradient(circle, rgba(255, 0, 150, 0.4) 0%, rgba(255, 0, 150, 0.2) 40%, transparent 80%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+}
+
+a.internal-link:hover {
+  background-size: 100% 100%;
+}
+
+a.internal-link::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid black;
+  border-radius: 0.4em;
+  opacity: 0;
+  z-index: -1;
+  transition-property: opacity;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
+}
+
+a.internal-link:hover::after {
+  opacity: 1;
+  transition: opacity 0s ease-in 1.1s;
+  transition-delay: 1.2s;
+}
+
+a:active {
+  outline: 2px solid var(--link-active-border-color);
+  outline-offset: 2px;
+}
+
+

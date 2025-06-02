@@ -1,0 +1,22 @@
+<%- include("../fragmente/header") %>
+
+<main class="zona zona-video">
+    <h2>Video demonstrativ despre pisici</h2>
+<video controls preload="auto"
+  poster="/resurse/video/poster-pisica.jpg"
+  style="width: 100%; max-width: 800px; min-width: 300px;">
+  
+  <source src="/resurse/video/pisica.mp4" type="video/mp4">
+  <source src="/resurse/video/pisica.webm" type="video/webm">
+
+  <track src="/resurse/video/Tracks/pisica.vtt" kind="subtitles" srclang="ro" label="Română" default>
+  <track src="/resurse/video/Tracks/pisica-en.vtt" kind="subtitles" srclang="en" label="English">
+
+  Browserul tău nu suportă elementul video.
+</video>
+
+
+</main>
+
+
+<%- include("../fragmente/footer") %>

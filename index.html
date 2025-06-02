@@ -7,8 +7,11 @@
         <meta name="keywords" content="pisici, rase de pisici, ingrijirea pisicilor, comportament pisici, nutritie pisici, sanatatea pisicilor">
         <meta name="description" content="Informatii despre pisici: rase, ingrijire, nutritie si comportament. Descopera tot ce trebuie sa stii despre aceste feline minunate!">
         <meta name="author" content="Cristian"> 
-        <link rel="stylesheet" href="nav.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="resurse/css/style.css">
+        <link rel="stylesheet" href="resurse/css/nav.css">
+        <link rel="stylesheet" href="resurse/css/meniu.css">
+        <link rel="stylesheet" href="resurse/css/print.css" media="print">
+        <link rel="stylesheet" href="/resurse/css/galerie.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="icon" type="image/png" href="./resurse/imagini/favicon/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="./resurse/imagini/favicon/favicon.svg" />
@@ -18,6 +21,7 @@
         <link rel="manifest" href="./resurse/imagini/favicon/site.webmanifest" />
     </head>
     <body>
+        
         <header>
             <h4>
                 <i class="fas fa-cat header-icon"></i>
@@ -32,11 +36,12 @@
                     <img src="./resurse/imagini/cat.jpg" alt="O pisica draguta.">
                 </picture>
                 <figcaption>O pisica draguta.</figcaption>
-            </figure>           
-            <nav class="dropdown-nav">
-  <ul>
+            </figure>
+            <button class="burger-icon" onclick="toggleMenu()">☰</button>           
+            <nav id="meniul" class="dropdown-nav">
+  <ul class="meniu">
     <li class="has-submenu">
-      <a href="#">Pagini site</a>
+      <a href="#" data-text="Pagini site">Pagini site</a>
       <ul class="submenu">
         <li class="has-submenu">
           <a href="#">Galerie</a>
@@ -50,7 +55,7 @@
       </ul>
     </li>
     <li class="has-submenu">
-      <a href="#">Secțiuni pagină</a>
+      <a href="#" data-text="Secțiuni pagină">Secțiuni pagină</a>
       <ul class="submenu">
         <li><a href="#sectiune1">Ingrijirea pisicilor</a></li>
         <li><a href="#sectiune2">Rase de pisici</a></li>
@@ -59,6 +64,11 @@
     </li>
   </ul>
 </nav>
+
+<button id="burger" class="burger">
+  <i class="fas fa-bars"></i>
+</button>
+
 
 
         </header>
@@ -106,40 +116,42 @@
                 <h2>Oferte speciale</h2>
                 <div class="tabel-container">
                     <table>
+                        <tbody>
+                            <table>
                         <thead>
                             <tr>
-                                <th>Produs</th>
-                                <th>Descriere</th>
-                                <th>Pret</th>
-                                <th>Valabilitate</th>
+                            <th>Produs</th>
+                            <th>Descriere</th>
+                            <th>Pret</th>
+                            <th>Valabilitate</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Hrana Premium</td>
-                                <td>Hrana de calitate superioara pentru pisici</td>
-                                <td>150 RON</td>
-                                <td>30 zile</td>
+                            <td>Hrana Premium</td>
+                            <td>Hrana de calitate superioara pentru pisici</td>
+                            <td>150 RON</td>
+                            <td>30 zile</td>
                             </tr>
                             <tr>
-                                <td>Jucarie Interactiva</td>
-                                <td>Stimuleaza inteligenta pisicii</td>
-                                <td>60 RON</td>
-                                <td>20 zile</td>
+                            <td>Jucarie Interactiva</td>
+                            <td>Stimuleaza inteligenta pisicii</td>
+                            <td>60 RON</td>
+                            <td>20 zile</td>
                             </tr>
                             <tr>
-                                <td>Pachet Ingrijire</td>
-                                <td>Sampon si perie pentru pisici</td>
-                                <td>80 RON</td>
-                                <td>25 zile</td>
-                                
+                            <td rowspan="2" class="merged-cell">Pachet Ingrijire</td>
+                            <td>Sampon si perie pentru pisici</td>
+                            <td>80 RON</td>
+                            <td>25 zile</td>
                             </tr>
                             <tr>
-                                <td>Pachet Ingrijire</td>
-                                <td>Hartie igienica pentru pisici</td>
-                                <td>35 RON</td>
-                                <td>10 zile</td>
+                            <td>Hartie igienica pentru pisici</td>
+                            <td>35 RON</td>
+                            <td>10 zile</td>
                             </tr>
+                        </tbody>
+                        </table>
                         </tbody>
                         <tfoot>
                             <tr>
@@ -165,7 +177,7 @@
         </main>
 
         
-        
+        <p class="banner-scolar">Acesta este un proiect școlar!</p>
         <footer id="zona8" class="zona">
             <a href="#">Inapoi sus</a>
             <p>Contact:</p>
@@ -173,7 +185,6 @@
                 <li><a href="tel:+40123456789">+40 123 456 789</a></li>
                 <li><a href="mailto:info@pisici.ro">info@pisici.ro</a></li>
                 <li><a href="https://www.google.com/maps?q=Facultatea+de+Matematica+si+Informatica" target="_blank">Adresa noastra</a></li>
-                <img src="./resurse/imagini/pin-mapa.png" usemap="#mapaFMI" alt="Locație" width="1" height="1" style="display: none;">
                 <map name="mapaFMI">
                 <area shape="rect" coords="0,0,1,1"
                         href="https://www.google.com/maps?q=Facultatea+de+Matematica+si+Informatica"
@@ -187,7 +198,7 @@
             <p>&copy; <time datetime="2025-03-16">2025</time> Copyright.</p>
 
              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.915308571453!2d26.102855315666892!3d44.43759527910162!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff5e7aaaaab1%3A0x57a4e182c4f97c0d!2sFacultatea%20de%20Matematic%C4%83%20%C8%99i%20Informatic%C4%83!5e0!3m2!1sro!2sro!4v1651234567890!5m2!1sro!2sro" width="600" height="450" style="border:0;" allowfullscreen></iframe>
-        </footer>
+            </footer>
 
         <button id="BacktoTop" onclick="scrollToTop()">&#8679;</button>
         <button id="scrollTopBtn" onclick="scrollToTop()">
@@ -209,6 +220,24 @@
             }
         </script>
 
-        
+        <script>
+  document.getElementById("burger").addEventListener("click", function () {
+    document.querySelector(".meniu").classList.toggle("meniu-deschis");
+  });
+</script>
+    <script>
+  const butoaneMeniu = document.querySelectorAll(".has-submenu > a");
+
+  butoaneMeniu.forEach(b => {
+    b.addEventListener("click", (e) => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        const parent = b.parentElement;
+        parent.classList.toggle("active");
+      }
+    });
+  });
+</script>
+    
     </body>
 </html>

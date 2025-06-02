@@ -1,0 +1,99 @@
+@media print {
+  header {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    border: 2px dotted black;
+    text-align: center;
+    page-break-after: always;
+  }
+
+  header h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-decoration: underline;
+  }
+
+  img,
+  video,
+  iframe,
+  embed,
+  object,
+  .container-iframe,
+  a[href^="#"] {
+    display: none !important;
+  }
+
+  .grid-container {
+    display: block !important;
+  }
+
+  a {
+    color: black !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+  }
+
+  h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+    page-break-after: always;
+  }
+
+  nav,
+  .meniu,
+  .dropdown-nav,
+  #burger,
+  .burger-icon {
+    display: none !important;
+  }
+
+  body::after {
+    content: "Popescu Cristian";
+    position: fixed;
+    bottom: 1cm;
+    right: 1cm;
+    font-size: 14px;
+    border: 2px double black;
+    opacity: 0.65;
+    width: 100px;
+    height: 2cm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    z-index: 1000;
+  }
+
+  @page :left {
+    margin-left: 2.5cm;
+    margin-right: 0.5cm;
+  }
+
+  @page :right {
+    margin-left: 0.5cm;
+    margin-right: 2.5cm;
+  }
+
+  .banner-scolar {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1em;
+  margin-top: 20px;
+}
+
+footer {
+  page-break-before: always;
+}
+
+
+  footer {
+    page-break-before: always;
+  }
+}

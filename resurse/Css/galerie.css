@@ -1,0 +1,64 @@
+.grid-galerie {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Ecran mediu */
+@media screen and (max-width: 992px) {
+  .grid-galerie {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gol {
+    display: none !important;
+  }
+}
+
+/* Ecran mic */
+@media screen and (max-width: 630px) {
+  .grid-galerie {
+    grid-template-columns: 1fr;
+  }
+  .gol {
+    display: none !important;
+  }
+}
+
+/* Figure și animații */
+.fig-galerie {
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  filter: sepia(100%);
+  transition: filter 0.8s ease, text-shadow 0.8s ease;
+  width: 100%;
+  max-width: 100%;
+}
+
+.fig-galerie:hover {
+  filter: sepia(0%);
+}
+
+.fig-galerie figcaption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.3em 0.5em;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.fig-galerie:hover figcaption {
+  transform: translateY(0%);
+}
+
+.fig-galerie.gol {
+  background-color: transparent;
+  box-shadow: none;
+  pointer-events: none;
+  visibility: hidden;
+}

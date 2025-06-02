@@ -1,0 +1,50 @@
+<header>
+            <h4>
+                <i class="fas fa-cat header-icon"></i>
+                <i class="fas fa-paw header-icon animated-icon"></i>
+                Pisici - Informatii si Ingrijire
+            </h4>
+            <h1>Pisici - Informatii si Ingrijire</h1> 
+            <figure>
+                <picture>
+                    <source srcset="/resurse/imagini/pisica-mica.jpg" media="(max-width: 700px)">
+                    <source srcset="/resurse/imagini/pisica-medie.jpg" media="(max-width: 1200px)">
+                    <img src="/resurse/imagini/cat.jpg" alt="O pisica draguta.">
+                </picture>
+                <figcaption>O pisica draguta.</figcaption>
+            </figure>
+            <button class="burger-icon" onclick="toggleMenu()">☰</button>           
+            <nav id="meniul" class="dropdown-nav">
+  <ul class="meniu">
+    <li class="has-submenu">
+      <a href="#" data-text="Pagini site">Pagini site</a>
+      <ul class="submenu">
+        <li class="has-submenu">
+          <a href="#">Galerie</a>
+          <ul class="submenu submenu-right">
+            <li><a href="/galerie">Galerie statică</a></li>
+            <li><a href="galerie-dinamica.html">Galerie dinamică</a></li>
+          </ul>
+        </li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="/despre">Despre</a></li>
+        <li><a href="/istoric">Istoric</a></li>
+        <li><a href="/video">Video Pisici</a></li>
+
+      </ul>
+    </li>
+    <li class="has-submenu">
+      <a href="#" data-text="Secțiuni pagină">Secțiuni pagină</a>
+      <ul class="submenu">
+        <li><a href="#sectiune1">Ingrijirea pisicilor</a></li>
+        <li><a href="#sectiune2">Rase de pisici</a></li>
+        <li><a href="#zona7">Întrebări frecvente</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<button id="burger" class="burger">
+  <i class="fas fa-bars"></i>
+</button>
+</header>

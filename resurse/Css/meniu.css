@@ -1,0 +1,233 @@
+:root {
+  --culoare-primara: #3498db;
+  --culoare-secundara: #2ecc71;
+  --culoare-accent: #e74c3c;
+  --culoare-text: #333;
+  --culoare-background: #d4ccf8;
+  --border-color: #ddd;
+}
+
+header {
+  position: relative;
+  z-index: 10;
+}
+
+.submenu {
+  background-color: var(--culoare-secundara);
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.submenu li {
+  margin: 5px 0;
+}
+
+.submenu li a {
+  display: block;
+  padding: 8px 12px;
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+  position: relative;
+  transition: none;
+}
+
+.submenu li a::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: var(--culoare-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: none;
+}
+
+.submenu li a:hover::after {
+  transform: scaleX(1);
+}
+
+.meniu > li > a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--culoare-primara);
+  color: white;
+  overflow: hidden;
+  z-index: 0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.meniu > li > a:hover {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.has-submenu > a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: white;
+  overflow: hidden;
+  background-color: var(--culoare-primara);
+  z-index: 0;
+  transition: background-color 0.3s ease;
+}
+
+.has-submenu > a span {
+  position: relative;
+  z-index: 2;
+}
+
+.has-submenu > a::before {
+  content: attr(data-text);
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: top 0.7s ease-in-out;
+  z-index: 1;
+}
+
+.has-submenu > a:hover::before {
+  top: 0%;
+}
+
+.has-submenu > a:hover {
+  background-color: #5dade2;
+}
+
+#burger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1001;
+}
+
+/* Ascunde meniul la ecrane mici */
+@media (max-width: 768px) {
+  .meniu {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--culoare-primara);
+    width: 100%;
+    padding: 10px;
+    animation: slideDown 0.5s ease forwards;
+  }
+  .meniu.meniu-deschis {
+    display: flex;
+  }
+  .burger {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 26px;
+    z-index: 999;
+  }
+}
+@media (min-width: 769px) {
+  .burger {
+    display: none;
+  }
+}
+@keyframes slideDown {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+.burger-icon {
+  display: none;
+  font-size: 28px;
+  color: white;
+  background: none;
+  border: none;
+  padding: 10px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+/* MENIU BURGER pentru ecran mic */
+@media screen and (max-width: 768px) {
+  .dropdown-nav ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--culoare-primara);
+  }
+  .dropdown-nav.meniu-deschis ul {
+    display: flex;
+  }
+  .dropdown-nav ul li {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid white;
+  }
+  .dropdown-nav ul li a {
+    padding: 15px;
+    display: block;
+    width: 100%;
+  }
+  .dropdown-nav ul li ul.submenu {
+    display: none;
+    flex-direction: column;
+    background-color: var(--culoare-primara);
+  }
+  .dropdown-nav ul li.active > ul.submenu {
+    display: flex;
+  }
+  .dropdown-nav ul li.has-submenu > a::before {
+    display: none;
+  }
+  #burger {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 999;
+  }
+}
+@media screen and (max-width: 768px) {
+  .dropdown-nav {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  .dropdown-nav ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--culoare-primara);
+  }
+  .dropdown-nav.meniu-deschis ul {
+    display: flex;
+  }
+}
+
+/*# sourceMappingURL=meniu.css.map */

@@ -1,0 +1,31 @@
+{
+  "cale_baza": "/resurse/imagini/erori",
+  "eroare_default": {
+    "titlu": "Eroare necunoscută",
+    "text": "A apărut o eroare neprevăzută.",
+    "imagine": "default.png"
+  },
+  "info_erori": [
+    {
+      "identificator": 404,
+      "status": true,
+      "titlu": "404 - Pagina inexistentă",
+      "text": "Pagina nu a fost găsită.",
+      "imagine": "404.png"
+    },
+    {
+      "identificator": 403,
+      "status": true,
+      "titlu": "403 - Acces interzis",
+      "text": "Nu aveți permisiunea de a accesa această resursă.",
+      "imagine": "403.png"
+    },
+    {
+        "identificator": 400,
+        "status": true,
+        "titlu": "400 - Cerere invalidă",
+        "text": "Cererea ta conține o extensie nepermisă (.ejs).",
+        "imagine": "400.png"
+    }   
+  ]
+}

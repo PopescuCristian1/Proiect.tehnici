@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<%- include("../fragmente/head.ejs") %>
+<main>
+  <h2>Galerie de imagini</h2>
+  <div class="grid-galerie">
+<%
+  const layout = [
+    [true, true, false],
+    [true, false, true],
+    [false, true, true],
+    [true, false, true],
+    [true, true, false],
+    [true, false, true],
+    [false, true, true],
+    [true, false, true],
+  ];
+
+  function toRoman(n) {
+    const roman = ["", "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii", "xiv", "xv", "xvi", "xvii", "xviii", "xix", "xx"];
+    return roman[n] || n;
+  }
+
+  let imgIndex = 0;
+  let totalPoze = imagini.length;
+  let linie = 0;
+
+  while (imgIndex < totalPoze) {
+    const pattern = layout[linie % layout.length];
+    for (let i = 0; i < 3; i++) {
+      if (pattern[i] && imgIndex < totalPoze) {
+        const imagine = imagini[imgIndex];
+%>
+        <figure class="fig-galerie" title="<%= imagine.title %>">
+          <picture>
+            <source srcset="<%= imagine.caleMic %>" media="(max-width: 480px)">
+            <source srcset="<%= imagine.caleMed %>" media="(max-width: 768px)">
+            <img src="<%= imagine.cale %>" alt="<%= imagine.alt %>">
+          </picture>
+          <figcaption><%= imagine.indexRoman %>. <%= imagine.descriere %></figcaption>
+        </figure>
+<%
+        imgIndex++;
+      } else {
+%>
+        <div class="gol"></div>
+<%
+      }
+    }
+    linie++;
+  }
+%>
+  </div>
+</main>
+<script src="/resurse/js/galerie.js"></script>
+<%- include("../fragmente/footer.ejs") %>
