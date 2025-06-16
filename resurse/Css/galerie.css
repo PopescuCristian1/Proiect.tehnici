@@ -16,7 +16,7 @@
 }
 
 /* Ecran mic */
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 750px) {
   .grid-galerie {
     grid-template-columns: 1fr;
   }
