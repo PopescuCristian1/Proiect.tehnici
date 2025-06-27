@@ -190,3 +190,30 @@ body.dark .zona h4,
 body.dark .zona summary {
   color: white;
 }
+
+.card-set {
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+  background-color: #e38895;
+  color: white;
+}
+.card-set .titlu-set {
+  color: black;
+  font-weight: bold;
+}
+.card-set .descriere-set {
+  font-style: italic;
+  color: black;
+}
+
+body.dark .card-set {
+  background-color: #a34454;
+  color: white;
+  box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.1);
+}
+body.dark .card-set .titlu-set, body.dark .card-set .descriere-set {
+  color: white;
+}

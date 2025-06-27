@@ -147,3 +147,35 @@ body.dark .zona summary {
   color: white;
 }
 
+//stilizare seturi
+.card-set {
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+
+  // Tema light
+  background-color: #e38895;
+  color: white;
+
+  .titlu-set {
+    color: black;
+    font-weight: bold;
+  }
+
+  .descriere-set {
+    font-style: italic;
+    color: black;
+  }
+}
+
+body.dark .card-set {
+  background-color: #a34454; 
+  color: white;
+  box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.1);
+
+  .titlu-set, .descriere-set {
+    color: white;
+  }
+}

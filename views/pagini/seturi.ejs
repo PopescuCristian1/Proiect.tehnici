@@ -1,0 +1,27 @@
+<%- include("../fragmente/head.ejs") %>
+<%- include("../fragmente/header.ejs") %>
+
+<main class="container-fluid py-4 px-4">
+  <h2 class="text-center mb-4">Seturi de Produse</h2>
+
+  <% for(let set of seturi) { %>
+    <section class="card-set my-4">
+      <h3 class="titlu-set"><%= set.nume %></h3>
+      <p class="descriere-set"><%= set.descriere %></p>
+      <p class="fw-bold">Preț set: <%= set.pret %> lei</p>
+
+      <div class="row g-4 mt-3">
+        <% for(let p of set.produse) { %>
+          <div class="col-md-4 col-6 text-center">
+            <a href="/produs/<%= p.id %>" class="text-decoration-none text-dark">
+              <img src="/resurse/imagini/pisici/<%= p.imagine %>" class="img-produs mb-1 shadow-sm rounded" alt="<%= p.nume %>">
+              <p class="fw-semibold"><%= p.nume %></p>
+            </a>
+          </div>
+        <% } %>
+      </div>
+    </section>
+  <% } %>
+</main>
+
+<%- include("../fragmente/footer.ejs") %>

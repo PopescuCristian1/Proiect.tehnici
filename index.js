@@ -307,20 +307,64 @@ app.get("/produs/:id", async (req, res) => {
 
     const prod = rezultat.rows[0];
 
-    // formatăm data
+    // formatam data
     const date = new Date(prod.data_aparitie);
     const zile = ["Duminică", "Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă"];
     const luni = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
                   "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"];
-
     prod.data_aparitie_form = `${date.getDate()}-${luni[date.getMonth()]}-${date.getFullYear()} (${zile[date.getDay()]})`;
 
-    res.render("pagini/produs", { prod });
+    // Preluam seturile in care apare acest produs
+    const query = `
+      SELECT s.id AS id_set, s.nume_set, s.descriere_set,
+             p.id AS id_produs, p.nume, p.imagine, p.pret
+      FROM seturi s
+      JOIN asociere_set a1 ON s.id = a1.id_set AND a1.id_produs = $1
+      JOIN asociere_set a2 ON s.id = a2.id_set
+      JOIN produse p ON p.id = a2.id_produs
+      ORDER BY s.id, p.id;
+    `;
+    const rezultatSeturi = await client.query(query, [id]);
+    const randuri = rezultatSeturi.rows;
+
+    const seturi = {};
+    for (let r of randuri) {
+      if (!seturi[r.id_set]) {
+        seturi[r.id_set] = {
+          id: r.id_set,
+          nume: r.nume_set,
+          descriere: r.descriere_set,
+          produse: [],
+          pret: 0
+        };
+      }
+
+      seturi[r.id_set].produse.push({
+        id: r.id_produs,
+        nume: r.nume,
+        imagine: r.imagine,
+        pret: parseFloat(r.pret)
+      });
+    }
+
+    for (let set of Object.values(seturi)) {
+      let suma = 0;
+      for (let p of set.produse) {
+        suma += p.pret;
+      }
+      const reducere = Math.min(set.produse.length, 5) * 0.05;
+      set.pret = (suma * (1 - reducere)).toFixed(2);
+    }
+
+    res.render("pagini/produs", { prod, seturi: Object.values(seturi) });
+
+
   } catch (err) {
     console.log(err);
     res.status(500).render("pagini/eroare", { err: "Eroare server." });
   }
 });
+
 
 
 
@@ -463,6 +507,66 @@ try {
     }
 });
 
+
+app.get("/seturi", async (req, res) => {
+  try {
+    const query = `
+      SELECT s.id AS id_set, s.nume_set, s.descriere_set, 
+             p.id AS id_produs, p.nume, p.imagine, p.pret
+      FROM seturi s
+      JOIN asociere_set a ON s.id = a.id_set
+      JOIN produse p ON a.id_produs = p.id
+      ORDER BY s.id, p.id;
+    `;
+
+    const rezultat = await client.query(query);
+    const randuri = rezultat.rows;
+
+    const seturi = {};
+for (let r of randuri) {
+  if (!seturi[r.id_set]) {
+    seturi[r.id_set] = {
+      id: r.id_set,
+      nume: r.nume_set,
+      descriere: r.descriere_set,
+      produse: [],
+      pret: 0
+    };
+  }
+
+  seturi[r.id_set].produse.push({
+    id: r.id_produs,
+    nume: r.nume,
+    imagine: r.imagine,
+    pret: parseFloat(r.pret)
+  });
+}
+
+for (let set of Object.values(seturi)) {
+  let suma = 0;
+  for (let p of set.produse) {
+    suma += p.pret;
+  }
+  const reducere = Math.min(set.produse.length, 5) * 0.05;
+  set.pret = (suma * (1 - reducere)).toFixed(2); 
+}
+
+    console.log("SETURI=", seturi);
+    console.log("=== PRETURI SETURI ===");
+for (let s of Object.values(seturi)) {
+    console.log(s.nume, "=>", s.pret);
+}
+
+    res.render("pagini/seturi", { seturi: Object.values(seturi) });
+  } catch (err) {
+    console.error(err);
+    res.status(500).render("pagini/eroare", {
+      titlu: "Eroare la afișarea seturilor",
+      text: "A apărut o problemă la afișarea datelor din baza de date.",
+      imagine: "/resurse/imagini/erori/default.png"
+    });
+  }
+});
 
 
 

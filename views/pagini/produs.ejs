@@ -34,6 +34,31 @@
                 <p class="descriere"><b>Descriere:</b> <%= prod.descriere %></p>
             </article>
         </section>
+        <% if (seturi && Object.keys(seturi).length > 0) { %>
+<section class="mt-5">
+  <h3 class="text-center text-primary">Seturi din care face parte acest produs</h3>
+
+  <% for(let set of Object.values(seturi)) { %>
+    <section class="card-set my-4 p-3 shadow rounded-4 bg-set text-white">
+      <h4 class="titlu-set"><%= set.nume %></h4>
+      <p class="descriere-set fst-italic"><%= set.descriere %></p>
+      <p class="fw-bold text-white">Preț set: <span class="text-success"><%= set.pret %> lei</span></p>
+
+      <div class="row g-4 mt-3">
+        <% for(let p of set.produse) { %>
+          <div class="col-md-4 col-6 text-center">
+            <a href="/produs/<%= p.id %>" class="text-decoration-none text-dark">
+              <img src="/resurse/imagini/pisici/<%= p.imagine %>" class="img-produs mb-1 shadow-sm rounded" alt="<%= p.nume %>">
+              <p class="fw-semibold"><%= p.nume %></p>
+            </a>
+          </div>
+        <% } %>
+      </div>
+    </section>
+  <% } %>
+</section>
+<% } %>
+
     </main>
 
     <%- include("../fragmente/footer.ejs") %>

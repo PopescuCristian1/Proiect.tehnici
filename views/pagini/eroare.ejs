@@ -2,9 +2,10 @@
 <%- include("../fragmente/header.ejs") %>
 
 <main>
-    <h1><%= titlu %></h1>
-    <p><%= text %></p>
-    <img src="<%= imagine %>" alt="Imagine eroare" style="max-width: 300px;">
+    <h1><%= typeof titlu !== 'undefined' ? titlu : "Eroare" %></h1>
+    <p><%= typeof text !== 'undefined' ? text : (typeof err !== 'undefined' ? err : "A apărut o eroare.") %></p>
+    <img src="<%= typeof imagine !== 'undefined' ? imagine : '/resurse/imagini/erori/default.png' %>" alt="Imagine eroare" style="max-width: 300px;">
 </main>
+
 
 <%- include("../fragmente/footer.ejs") %>
