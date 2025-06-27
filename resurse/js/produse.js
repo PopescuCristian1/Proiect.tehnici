@@ -10,6 +10,55 @@ document.addEventListener("DOMContentLoaded", function () {
   const checkboxDiscount = document.getElementById("inp-discount");
   const inputComportamentRadio = document.getElementsByName("comportament-radio");
 
+  const modal = document.getElementById("modal-produse");
+const modalContinut = document.getElementById("continut-modal");
+const btnInchide = document.getElementById("btn-inchide-modal");
+if (btnInchide)
+  btnInchide.onclick = () => {
+    modal.style.display = "none";
+  };
+
+window.onclick = e => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+};
+
+
+document.querySelectorAll(".grid-produse article").forEach(art => {
+  art.addEventListener("click", (e) => {
+    const tag = e.target.tagName.toLowerCase();
+  if (
+    ["p", "h3", "a", "strong", "span", "summary", "details", "button", "svg", "use"].includes(tag) ||
+    e.target.closest("a") ||
+    e.target.closest("summary") ||
+    e.target.hasAttribute("data-no-modal")
+  ) return;
+    const titlu = art.querySelector("h3")?.textContent;
+    const poza = art.querySelector("img")?.src;
+    const pret = art.dataset.pret;
+    const categorie = art.dataset.categorie;
+    const greutate = art.dataset.greutate;
+    const descriere = art.querySelector(".descriere")?.textContent;
+
+    modalContinut.innerHTML = `
+      <h3>${titlu}</h3>
+      <img src="${poza}" alt="Imagine ${titlu}" style="width: 100%; max-width: 300px; border-radius: 10px;">
+      <p><strong>Categorie:</strong> ${categorie}</p>
+      <p><strong>Preț:</strong> ${pret} lei</p>
+      <p><strong>Greutate:</strong> ${greutate} kg</p>
+      <p>${descriere}</p>
+    `;
+
+    modal.style.display = "flex";
+  });
+});
+
+  function normalizeText(text) {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+
   function valideazaInputuri() {
     const nume = document.getElementById("inp-nume");
     const observatii = document.getElementById("inp-observatii");
@@ -44,11 +93,21 @@ document.addEventListener("DOMContentLoaded", function () {
     btnFiltrare.onclick = function () {
       if (!valideazaInputuri()) return;
       const articole = document.getElementsByTagName("article");
-      const valoareNume = inputNume.value.toLowerCase();
+      const valoareNume = normalizeText(inputNume.value);
       const valoarePret = parseFloat(inputPret.value);
       const valoareCategorie = inputCategorie.value.toLowerCase();
-      const valDatalist = document.getElementById("inp-datalist").value.toLowerCase();
-      const valObservatii = document.getElementById("inp-observatii").value.toLowerCase();
+      const valDatalist = normalizeText(document.getElementById("inp-datalist").value);
+      const valObservatii = normalizeText(document.getElementById("inp-observatii").value);
+
+
+      
+
+btnInchide.onclick = () => modal.style.display = "none";
+window.onclick = e => {
+  if (e.target === modal) modal.style.display = "none";
+};
+
+
 
       let greutateSelectata = "toate";
       for (let radio of inputGreutate) {
@@ -62,14 +121,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
       for (let art of articole) {
         let afiseaza = true;
-        const nume = art.querySelector("h3")?.textContent.toLowerCase() ?? "";
+        const nume = normalizeText(art.querySelector("h3")?.textContent ?? "");
         const pret = parseFloat(art.dataset.pret);
         const categorie = art.dataset.categorie?.toLowerCase() ?? "";
         const greutate = parseFloat(art.dataset.greutate);
         const medii = art.dataset.medii?.toLowerCase().split(",") ?? [];
         const culoare = art.dataset.culoare?.toLowerCase() ?? "";
-        const subcategorie = art.dataset.subcategorie?.toLowerCase() ?? "";
-        const observatii = art.dataset.observatii?.toLowerCase() ?? "";
+        const subcategorie = normalizeText(art.dataset.subcategorie ?? "");
+        const observatii = normalizeText(art.dataset.observatii ?? "");
         const luna = art.dataset.luna;
         const comportament = art.dataset.comportament;
 
@@ -95,7 +154,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
         art.style.display = afiseaza ? "grid" : "none";
       }
+      let vreunAfisat = false;
+
+for (let art of articole) {
+  if (art.style.display !== "none") vreunAfisat = true;
+}
+
+let totalAfisate = 0;
+for (let art of articole) {
+  if (art.style.display !== "none") totalAfisate++;
+}
+document.getElementById("nr-produse").textContent = totalAfisate;
+
+
+const mesaj = document.getElementById("mesaj-vid");
+if (mesaj) {
+  mesaj.style.display = vreunAfisat ? "none" : "block";
+}
     };
+
+    
 
   const inpPret = document.getElementById("inp-pret");
   const valCurent = document.getElementById("val-curent");
@@ -212,4 +290,35 @@ document.addEventListener("DOMContentLoaded", function () {
       document.body.appendChild(div);
       setTimeout(() => div.remove(), 2000);
     };
+    function marcheazaCeleMaiIeftineProduse() {
+  const articole = document.querySelectorAll(".grid-produse article");
+  const produsePeCategorii = {};
+
+  articole.forEach(art => {
+    const cat = art.dataset.categorie;
+    const pret = parseFloat(art.dataset.pret);
+    if (!produsePeCategorii[cat] || pret < produsePeCategorii[cat].pret) {
+      produsePeCategorii[cat] = { pret, articol: art };
+    }
+  });
+
+  for (const cat in produsePeCategorii) {
+    const art = produsePeCategorii[cat].articol;
+    const badge = document.createElement("p");
+    badge.textContent = "✨ Cel mai ieftin produs din categorie ✨";
+    badge.classList.add("ieftin");
+    art.prepend(badge);
+  }
+}
+marcheazaCeleMaiIeftineProduse();
+
+const articoleInitiale = document.querySelectorAll(".grid-produse article");
+let totalInitial = 0;
+articoleInitiale.forEach(art => {
+  if (art.style.display !== "none") totalInitial++;
+});
+document.getElementById("nr-produse").textContent = totalInitial;
+
+
+
 });

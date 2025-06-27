@@ -13,10 +13,8 @@
 <header class="c1" id="titlu">
     <h1 style="color: red;">Catalog <span>Pisici</span></h1>
     <%- include("../fragmente/header.ejs") %>
-</header>
-
     
-
+</header>
 
     <main>
         <section id="sectiune-filtrare" class="container">
@@ -28,12 +26,15 @@
   </div>
 
   <div class="col-12 col-md-6 col-lg-4">
-    <label for="inp-pret">Pret minim:</label>
-    <span id="val-min">0</span>
-    <input type="range" class="form-range" id="inp-pret" name="pret" min="0" max="10000" step="50" value="0">
-    <span id="val-curent">(0)</span>
-    <span id="val-max">10000</span>
-  </div>
+  <label for="inp-pret">Preț minim:</label>
+  <span id="val-min"><%= pretMinim %></span>
+  <input type="range" class="form-range" id="inp-pret" name="pret"
+         min="<%= pretMinim %>" max="<%= pretMaxim %>"
+         step="50" value="<%= pretMinim %>">
+  <span id="val-curent">(<%= pretMinim %>)</span>
+  <span id="val-max"><%= pretMaxim %></span>
+</div>
+
 
   <div class="col-12 col-md-6 col-lg-4">
   <label for="inp-datalist">Comportament:</label>
@@ -189,6 +190,64 @@
   </button>
 </div>
 
+<p id="numar-produse" class="text-info" style="font-weight: bold; font-size: 1.2rem; margin: 1em 0;">
+  Număr produse afișate: <span id="nr-produse">0</span>
+</p>
+
+<% if (ofertaCurenta) { %>
+  <div class="anunt-oferta" id="container-oferta">
+    <p>🎉 <strong><%= ofertaCurenta.reducere %>% REDUCERE</strong> la produsele din categoria <strong><%= ofertaCurenta.categorie %></strong>!</p>
+    <p>Valabil până la ora: <%= ofertaCurenta["ora-finalizare"] %></p>
+    <p>Timp rămas: <span id="timer" data-final="<%= ofertaCurenta['ora-finalizare'] %>"></span></p>
+  </div>
+
+  <script>
+  const timer = document.getElementById("timer");
+  const container = document.getElementById("container-oferta");
+  const finalHour = "<%= ofertaCurenta['ora-finalizare'] %>"; 
+
+  function updateTimer() {
+    const [endH, endM] = finalHour.split(":").map(Number);
+    const now = new Date();
+    const endTime = new Date(now);
+    endTime.setHours(endH, endM, 0, 0);
+
+    if (endTime < now) {
+      endTime.setDate(endTime.getDate() + 1);
+    }
+
+    const diff = endTime - now;
+
+    if (diff <= 0) {
+      container.remove();
+      return;
+    }
+
+    const sec = Math.floor(diff / 1000) % 60;
+    const min = Math.floor(diff / 1000 / 60) % 60;
+    const h = Math.floor(diff / 1000 / 60 / 60);
+
+    timer.innerText = `${h}h ${min}m ${sec}s`;
+
+    if (diff <= 10000) {
+      container.style.backgroundColor = "#ffcccc";
+      timer.style.color = "red";
+      timer.style.fontWeight = "bold";
+    } else {
+      container.style.backgroundColor = "";
+      timer.style.color = "";
+      timer.style.fontWeight = "";
+    }
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+</script>
+
+
+<% } %>
+
+
 
 </section>
 
@@ -224,7 +283,17 @@
                                     </a>
                                 </figure>
                                 <p><b>Categorie:</b> <i><%- prod.categorie_mare %></i></p>
-                                <p><b>Preț:</b> <i><%- prod.pret %> lei</i></p>
+                                <% if (ofertaCurenta && ofertaCurenta.categorie === prod.categorie) { %>
+                                <p><b>Preț:</b>
+                                  <span style="text-decoration: line-through; color: #900;"><%= prod.pret %> lei</span>
+                                  <span style="font-weight: bold; color: green;">
+                                    <%= (prod.pret * (1 - ofertaCurenta.reducere / 100)).toFixed(2) %> lei
+                                  </span>
+                                </p>
+                              <% } else { %>
+                                <p><b>Preț:</b> <i><%= prod.pret %> lei</i></p>
+                              <% } %>
+
                             </div>
                             <div class="coloana2">
                                 <details>
@@ -246,8 +315,19 @@
                         </div>
                     </article>
                     <% } %>
+                    <p id="mesaj-vid" class="text-center text-danger fw-bold mt-4" style="display:none;">
+                    Nu există produse conform filtrării curente.
+                  </p>
             </div>
         </section>
+
+        <div id="modal-produse" class="modal">
+  <div id="continut-modal" class="modal-content">
+    <span id="btn-inchide-modal" class="close-modal">&times;</span>
+  </div>
+</div>
+
+
     </main>
 
     <%- include("../fragmente/footer.ejs") %>

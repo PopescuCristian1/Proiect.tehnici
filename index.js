@@ -37,7 +37,7 @@ function compileazaScss(caleScss, caleCss) {
 
     if (fs.existsSync(caleCss)) {
         try {
-            const caleRelativaCss = path.relative(globalThis.folderCss, caleCss); // ex: "stil.css"
+            const caleRelativaCss = path.relative(globalThis.folderCss, caleCss); 
             const caleBackup = path.join(__dirname, "backup", "resurse", "css", caleRelativaCss);
             const dirBackup = path.dirname(caleBackup);
 
@@ -211,9 +211,8 @@ app.use(async (req, res, next) => {
 app.use("/resurse/imagini/galerie/small", express.static(path.join(__dirname, "resurse", "imagini", "galerie", "small")));
 app.use("/resurse/imagini/galerie/medium", express.static(path.join(__dirname, "resurse", "imagini", "galerie", "medium")));
 
-app.get(["/", "/index", "/home"], (req, res) => {
-  res.render("pagini/index", { ip: req.ip });
-});
+
+
 
 
 app.get("/interzis", function (req, res) {
@@ -299,13 +298,6 @@ app.get("/galerie-animata", async (req, res) => {
 });
 
 
-
-
-
-
-
-
-
 app.get("/produs/:id", async (req, res) => {
   const id = parseInt(req.params.id);
   try {
@@ -343,6 +335,8 @@ app.get("/produse/:categorie?", async (req, res) => {
         valori.push(categorie);
     }
 
+    
+
     let query = "SELECT * FROM produse";
     if (conditie.length > 0) {
         query += " WHERE " + conditie.join(" AND ");
@@ -363,11 +357,105 @@ app.get("/produse/:categorie?", async (req, res) => {
 
         let enum_categorii = await client.query("SELECT unnest(enum_range(NULL::categorie_mare)) as cat");
         let optiuni = enum_categorii.rows.map(c => c.cat);
+        let pretMinim = null, pretMaxim = null;
+
+        for (let prod of produse) {
+            if (pretMinim == null || prod.pret < pretMinim) pretMinim = prod.pret;
+            if (pretMaxim == null || prod.pret > pretMaxim) pretMaxim = prod.pret;
+        }
+
+
+        let ofertaCurenta = null;
+
+try {
+    const raw = await fsp.readFile("resurse/Json/oferte.json", "utf-8");
+    const jsonOferte = JSON.parse(raw);
+
+    const acum = new Date();
+    const oraCurentaMin = acum.getHours() * 60 + acum.getMinutes();
+
+    //ȘTERGEREA ofertelor expirate ===
+    const T2 = 1; 
+    const acumMinAbs = acum.getTime() / (1000 * 60);
+
+    jsonOferte.oferte = jsonOferte.oferte.filter(oferta => {
+    const [hEnd, mEnd] = oferta["ora-finalizare"].split(":").map(Number);
+    const [hStart, mStart] = oferta["ora-incepere"].split(":").map(Number);
+
+    const endDate = new Date(acum);
+    const startMin = hStart * 60 + mStart;
+    const endMin = hEnd * 60 + mEnd;
+
+    if (startMin > endMin) {
+        if (oraCurentaMin < endMin || oraCurentaMin >= startMin) {
+            endDate.setDate(endDate.getDate() + 1);
+        }
+    }
+
+    endDate.setHours(hEnd, mEnd, 0, 0);
+
+    const endAbsMin = endDate.getTime() / (1000 * 60);
+    return endAbsMin >= acumMinAbs - T2;
+});
+
+
+    // SELECTAREA ofertei active ===
+    const oferteSortate = jsonOferte.oferte.sort((a, b) => {
+        const [h1, m1] = a["ora-incepere"].split(":").map(Number);
+        const [h2, m2] = b["ora-incepere"].split(":").map(Number);
+        return (h1 * 60 + m1) - (h2 * 60 + m2);
+    });
+
+    for (let oferta of oferteSortate) {
+        const [hStart, mStart] = oferta["ora-incepere"].split(":").map(Number);
+        const [hEnd, mEnd] = oferta["ora-finalizare"].split(":").map(Number);
+
+        const startMin = hStart * 60 + mStart;
+        const endMin = hEnd * 60 + mEnd;
+
+        let esteInInterval = false;
+
+        if (startMin < endMin) {
+            esteInInterval = oraCurentaMin >= startMin && oraCurentaMin < endMin;
+        } else {
+            esteInInterval = oraCurentaMin >= startMin || oraCurentaMin < endMin;
+        }
+
+        if (esteInInterval) {
+            const dataFinalizare = new Date(acum);
+            if (startMin > endMin && oraCurentaMin < endMin) {
+                dataFinalizare.setDate(acum.getDate() + 1);
+            }
+            dataFinalizare.setHours(hEnd);
+            dataFinalizare.setMinutes(mEnd);
+            dataFinalizare.setSeconds(0);
+            dataFinalizare.setMilliseconds(0);
+
+            ofertaCurenta = {
+                ...oferta,
+                minutFinalAbsolut: endMin,
+                "data-finalizare": dataFinalizare.toISOString()
+            };
+            break;
+        }
+    }
+
+    await fsp.writeFile("resurse/Json/oferte.json", JSON.stringify(jsonOferte, null, 2));
+} catch (e) {
+    console.log("Eroare la citirea ofertelor:", e);
+}
+
+
+
+
 
         res.render("pagini/produse", {
             produse: produse,
             categorie_selectata: categorie,
-            optiuni: optiuni
+            optiuni: optiuni,
+            pretMinim,
+            pretMaxim,
+            ofertaCurenta
         });
     } catch (err) {
         console.log(err);

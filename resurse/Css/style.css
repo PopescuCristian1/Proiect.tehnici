@@ -188,3 +188,20 @@ a:active {
   margin-right: 0.1rem;
 }
 
+.anunt-oferta {
+  background-color: #fff3cd;
+  border-left: 5px solid #f0ad4e;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #856404;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  max-width: 600px;
+}
+
+
+.anunt-oferta.final-secunde {
+  background-color: #ffcccc;
+  border-left-color: red;
+}
