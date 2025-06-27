@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <%- include("../fragmente/head.ejs") %>
+  <body>
+    <%- include("../fragmente/header.ejs") %>
+
+    <main>
+      <section class="galerie-animata">
+        <% imagini.forEach((img, index) => { %>
+  <div class="poza-galerie<%= index === 0 ? ' activ' : '' %>">
+    <img src="<%= img.src %>" alt="<%= img.alt %>">
+    <div class="titlu-poza"><%= img.alt %></div>
+  </div>
+<% }); %>
+
+      </section>
+    </main>
+
+    <script src="/resurse/js/galerie-animata.js"></script>
+    <%- include("../fragmente/footer.ejs") %>
+  </body>
+</html>

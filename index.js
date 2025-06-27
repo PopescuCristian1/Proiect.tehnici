@@ -3,6 +3,7 @@ const fs = require("fs");
 const express = require("express");
 const path = require("path");
 const sass = require("sass");
+const fsp = require("fs/promises");
 
 const { Client } = require("pg");
 
@@ -274,6 +275,36 @@ app.get("/galerie", (req, res) => {
 
   res.render("pagini/galerie", { imagini });
 });
+
+
+
+app.get("/galerie-animata", async (req, res) => {
+  const caleJson = path.join(__dirname, "resurse", "json", "galerie.json");
+  const raw = await fsp.readFile(caleJson);
+  const json = JSON.parse(raw);
+
+  const puteri = [2, 4, 8];
+  const nrPoze = puteri[Math.floor(Math.random() * puteri.length)];
+
+  const imaginiCuIndexPar = json.imagini.filter((_, i) => i % 2 === 0);
+
+  const imaginiGalerie = imaginiCuIndexPar
+    .slice(0, nrPoze)
+    .map(img => ({
+      src: "/" + json.cale_galerie + img.fisier_imagine, 
+      alt: img.continut_alternativ || ""
+    }));
+
+  res.render("pagini/galerie-animata", { imagini: imaginiGalerie });
+});
+
+
+
+
+
+
+
+
 
 app.get("/produs/:id", async (req, res) => {
   const id = parseInt(req.params.id);
