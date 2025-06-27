@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta name="description" content="Catalog interactiv cu rase de pisici: informații, filtrare și comparații.">
+    <meta name="keywords" content="pisici, rase pisici, catalog pisici, animale de companie, filtrare pisici">
+    <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
+    <title>Catalog Pisici</title>
+    <%- include("../fragmente/head.ejs") %>     
+    <script type="text/javascript" src="/resurse/js/produse.js"></script>
+    <script type="text/javascript" src="/resurse/js/produse-cos.js"></script>
+</head>
+<body>
+<header class="c1" id="titlu">
+    <h1 style="color: red;">Catalog <span>Pisici</span></h1>
+    <%- include("../fragmente/header.ejs") %>
+</header>
+
+    
+
+
+    <main>
+        <section id="sectiune-filtrare" class="container">
+  <div class="row g-4">
+
+  <div class="col-12 col-md-6 col-lg-4">
+    <label for="inp-nume">Nume:</label>
+    <input type="text" id="inp-nume" name="nume" class="form-control">
+  </div>
+
+  <div class="col-12 col-md-6 col-lg-4">
+    <label for="inp-pret">Pret minim:</label>
+    <span id="val-min">0</span>
+    <input type="range" class="form-range" id="inp-pret" name="pret" min="0" max="10000" step="50" value="0">
+    <span id="val-curent">(0)</span>
+    <span id="val-max">10000</span>
+  </div>
+
+  <div class="col-12 col-md-6 col-lg-4">
+  <label for="inp-datalist">Comportament:</label>
+  <input list="lista-comportament" id="inp-datalist" class="form-control">
+  <datalist id="lista-comportament">
+    <option value="calmă">
+    <option value="activă">
+    <option value="blândă">
+    <option value="prietenoasă">
+    <option value="curajoasă">
+    <option value="vocală">
+    <option value="inteligentă">
+  </datalist>
+</div>
+
+
+  <div class="col-12 col-md-6 col-lg-4">
+  <label class="form-label d-block">Greutate:</label>
+  <div class="btn-group" role="group">
+    <input type="radio" class="btn-check" name="greutate" id="greutate-toate" value="toate" autocomplete="off" checked>
+    <label class="btn btn-outline-primary" for="greutate-toate">Toate</label>
+
+    <input type="radio" class="btn-check" name="greutate" id="greutate-usoare" value="usoare" autocomplete="off">
+    <label class="btn btn-outline-primary" for="greutate-usoare">Usoare (< 3kg)</label>
+
+    <input type="radio" class="btn-check" name="greutate" id="greutate-mijlocii" value="mijlocii" autocomplete="off">
+    <label class="btn btn-outline-primary" for="greutate-mijlocii">Mijlocii (3-5kg)</label>
+
+    <input type="radio" class="btn-check" name="greutate" id="greutate-grele" value="grele" autocomplete="off">
+    <label class="btn btn-outline-primary" for="greutate-grele">Grele (> 5kg)</label>
+  </div>
+</div>
+
+
+  <div class="col-12 col-md-6 col-lg-4">
+    <label>Medii de viață:</label>
+    <div class="btn-group" role="group">
+  <input type="checkbox" class="btn-check" id="mediu-interior" name="medii" value="interior" autocomplete="off">
+  <label class="btn btn-outline-secondary" for="mediu-interior">Interior</label>
+
+  <input type="checkbox" class="btn-check" id="mediu-exterior" name="medii" value="exterior" autocomplete="off">
+  <label class="btn btn-outline-secondary" for="mediu-exterior">Exterior</label>
+
+  <input type="checkbox" class="btn-check" id="mediu-ambele" name="medii" value="ambele" autocomplete="off">
+  <label class="btn btn-outline-secondary" for="mediu-ambele">Ambele</label>
+</div>
+
+  </div>
+
+  <div class="col-12 col-md-6 col-lg-4">
+  <div class="form-floating mb-3">
+    <textarea class="form-control" placeholder="Scrie observații..." id="inp-observatii" style="height: 100px"></textarea>
+    <label for="inp-observatii">Observații</label>
+  </div>
+</div>
+
+
+
+
+
+  <div class="col-12 col-md-6 col-lg-4">
+    <label for="inp-categorie">Categorie:</label>
+    <select id="inp-categorie" class="form-select">
+      <option value="">Oricare</option>
+      <% optiuni.forEach(categorie => { %>
+        <option value="<%= categorie %>"><%= categorie %></option>
+      <% }); %>
+    </select>
+  </div>
+
+  <div class="col-12 col-md-6 col-lg-4">
+    <label for="inp-culori">Culori posibile:</label>
+    <select multiple id="inp-culori" class="form-select">
+      <option value="alb">Alb</option>
+      <option value="maro">Maro</option>
+      <option value="gri">Gri</option>
+      <option value="roz">Roz</option>
+      <option value="roșcat">Roșcat</option>
+    </select>
+  </div>
+
+  <div class="col-12 col-md-6 col-lg-4">
+  <label for="inp-luni">Luna adăugare:</label>
+  <select id="inp-luni" multiple class="form-select">
+    <option value="toate" selected>Oricare</option>
+    <option value="01" selected>Ianuarie</option>
+    <option value="02" selected>Februarie</option>
+    <option value="03" selected>Martie</option>
+    <option value="04" selected>Aprilie</option>
+    <option value="05" selected>Mai</option>
+    <option value="06" selected>Iunie</option>
+    <option value="07" selected>Iulie</option>
+    <option value="08" selected>August</option>
+    <option value="09" selected>Septembrie</option>
+    <option value="10" selected>Octombrie</option>
+    <option value="11" selected>Noiembrie</option>
+    <option value="12" selected>Decembrie</option>
+  </select>
+</div>
+
+<div class="col-12 col-md-6 col-lg-4">
+  <div class="btn-group" role="group">
+    <input type="checkbox" class="btn-check" id="inp-discount" autocomplete="off">
+    <label class="btn btn-outline-warning" for="inp-discount">Afișează doar cu discount (preț > 2000 lei)</label>
+  </div>
+</div>
+
+
+
+<div class="col-12 col-md-6 col-lg-4">
+  <label class="form-label d-block">Comportament fix:</label>
+  <div class="btn-group" role="group">
+    <input type="radio" class="btn-check" name="comportament-radio" id="comp-toate" value="toate" autocomplete="off" checked>
+    <label class="btn btn-outline-dark" for="comp-toate">Toate</label>
+
+    <input type="radio" class="btn-check" name="comportament-radio" id="comp-calma" value="calmă" autocomplete="off">
+    <label class="btn btn-outline-dark" for="comp-calma">Calmă</label>
+
+    <input type="radio" class="btn-check" name="comportament-radio" id="comp-jucausa" value="jucăușă" autocomplete="off">
+    <label class="btn btn-outline-dark" for="comp-jucausa">Jucăușă</label>
+
+    <input type="radio" class="btn-check" name="comportament-radio" id="comp-activa" value="activă" autocomplete="off">
+    <label class="btn btn-outline-dark" for="comp-activa">Activă</label>
+
+    <input type="radio" class="btn-check" name="comportament-radio" id="comp-blanda" value="blândă" autocomplete="off">
+    <label class="btn btn-outline-dark" for="comp-blanda">Blândă</label>
+
+    <input type="radio" class="btn-check" name="comportament-radio" id="comp-prietenoasa" value="prietenoasă" autocomplete="off">
+    <label class="btn btn-outline-dark" for="comp-prietenoasa">Prietenoasă</label>
+  </div>
+</div>
+
+
+  <div class="col-12 d-flex flex-wrap gap-2">
+  <button id="btn-filtrare" class="btn btn-primary btn-sm d-flex align-items-center gap-1">
+    <i class="bi bi-funnel-fill"></i> <span class="d-none d-md-inline">Filtrare</span>
+  </button>
+
+  <button id="btn-resetare" class="btn btn-secondary btn-sm d-flex align-items-center gap-1">
+    <i class="bi bi-arrow-clockwise"></i> <span class="d-none d-md-inline">Resetare</span>
+  </button>
+
+  <button id="sort-asc" class="btn btn-outline-success btn-sm d-flex align-items-center gap-1">
+    <i class="bi bi-sort-numeric-up-alt"></i> <span class="d-none d-md-inline">Sortează Ascendent</span>
+  </button>
+
+  <button id="sort-desc" class="btn btn-outline-danger btn-sm d-flex align-items-center gap-1">
+    <i class="bi bi-sort-numeric-down-alt"></i> <span class="d-none d-md-inline">Sortează Descendent</span>
+  </button>
+
+  <button id="btn-suma" class="btn btn-info btn-sm d-flex align-items-center gap-1">
+    <i class="bi bi-calculator-fill"></i> <span class="d-none d-md-inline">Calculează suma prețurilor afișate</span>
+  </button>
+</div>
+
+
+</section>
+
+    
+        <section id="produse">
+
+            <h2>Produse</h2>
+            <div class="grid-produse">
+                <% for (let prod of locals.produse) { %>
+                    <article id="produs_<%= prod.id %>" class="card-produs produs <%= prod.categorie_mare.toLowerCase().replace(/\s+/g, '-') %>"
+                        data-nume="<%= prod.nume.toLowerCase() %>"
+                        data-pret="<%= prod.pret %>"
+                        data-greutate="<%= prod.greutate %>"
+                        data-culoare="<%= prod.culoare.toLowerCase() %>"
+                        data-medii="<%= prod.medii_viata.toLowerCase() %>"
+                        data-subcategorie="<%= prod.subcategorie.toLowerCase() %>"
+                        data-observatii="<%= prod.descriere.toLowerCase() %>"
+                        data-categorie="<%= prod.categorie_mare.toLowerCase() %>"
+                        <%
+                        const luna = new Date(prod.data_aparitie).getMonth() + 1;
+                        const lunaFormatata = (luna < 10 ? "0" : "") + luna;
+                        %>
+                        data-luna="<%= lunaFormatata %>"
+
+                        data-comportament="<%= prod.subcategorie.toLowerCase() %>">
+
+                        <h3><a href="/produs/<%- prod.id %>"><%- prod.nume %></a></h3>
+                        <div class="produs-container">
+                            <div class="coloana1">
+                                <figure>
+                                    <a href="/produs/<%- prod.id %>">
+                                        <img src="/resurse/imagini/pisici/<%- prod.imagine %>" alt="Imagine <%- prod.nume %>" />
+                                    </a>
+                                </figure>
+                                <p><b>Categorie:</b> <i><%- prod.categorie_mare %></i></p>
+                                <p><b>Preț:</b> <i><%- prod.pret %> lei</i></p>
+                            </div>
+                            <div class="coloana2">
+                                <details>
+                                    <summary>Specificații</summary>
+                                    <ul>
+                                        <li><b>Culoare:</b> <i><%- prod.culoare %></i></li>
+                                        <li><b>Comportament:</b> <i><%- prod.subcategorie %></i></li>
+                                        <li><b>Greutate (kg):</b> <i><%- prod.greutate %></i></li>
+                                        <li><b>Dată apariție:</b> 
+                                            <time datetime="<%- prod.data_aparitie %>">
+                                                <%- prod.data_aparitie_form %>
+                                            </time>
+                                        </li>
+                                        <li><b>Potrivit pentru alergici:</b> <i><%- prod.hipoalergenic ? "Da" : "Nu" %></i></li>
+                                    </ul>
+                                </details>
+                                <p class="descriere"><%- prod.descriere %></p>
+                            </div>
+                        </div>
+                    </article>
+                    <% } %>
+            </div>
+        </section>
+    </main>
+
+    <%- include("../fragmente/footer.ejs") %>
+    </body>
+</html>

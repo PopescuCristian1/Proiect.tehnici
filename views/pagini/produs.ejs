@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title><%= prod.nume %> - Detalii</title>
+    <%- include("../fragmente/head.ejs") %>
+    <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
+    <script defer src="/resurse/js/produse.js"></script>
+
+</head>
+<body>
+    <%- include("../fragmente/header.ejs") %>
+
+    <main>
+        
+        <section>
+            <article id="art-produs">
+                <h2><%= prod.nume %></h2>
+
+                <figure class="imag-produs">
+                    <img src="/resurse/imagini/pisici/<%= prod.imagine %>" alt="Imagine <%= prod.nume %>" />
+                </figure>
+
+                <ul class="detalii-produs">
+                    <li><b>Categorie:</b> <i><%= prod.categorie_mare %></i></li>
+                    <li><b>Comportament:</b> <i><%= prod.subcategorie %></i></li>
+                    <li><b>Preț:</b> <i><%= prod.pret %> lei</i></li>
+                    <li><b>Greutate:</b> <i><%= prod.greutate %> kg</i></li>
+                    <li><b>Culoare:</b> <i><%= prod.culoare %></i></li>
+                    <li><b>Medii de viață:</b> <i><%= prod.medii_viata %></i></li>
+                    <li><b>Dată apariție:</b> <i><%= prod.data_aparitie_form %></i></li>
+                    <li><b>Hipoalergenic:</b> <i><%= prod.hipoalergenic ? "Da" : "Nu" %></i></li>
+                </ul>
+
+                <p class="descriere"><b>Descriere:</b> <%= prod.descriere %></p>
+            </article>
+        </section>
+    </main>
+
+    <%- include("../fragmente/footer.ejs") %>
+</body>
+</html>

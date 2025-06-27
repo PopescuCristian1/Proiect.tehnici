@@ -1,0 +1,102 @@
+{
+  "produse": [
+    {
+      "id": 1,
+      "nume": "British Shorthair",
+      "descriere": "Pisică calmă, ideală pentru apartamente.",
+      "imagine": "british.jpg",
+      "categorie": "Mica",
+      "comportament": "calmă",
+      "pret": 1500,
+      "greutate": 4.5,
+      "data_aparitie": "2023-02-10",
+      "culoare": "Gri",
+      "medii_viata": "interior",
+      "hipoalergenic": false
+    },
+    {
+      "id": 2,
+      "nume": "Maine Coon",
+      "descriere": "Pisică foarte mare și blândă.",
+      "imagine": "mainecoon.jpg",
+      "categorie": "Mare",
+      "comportament": "blândă",
+      "pret": 2000,
+      "greutate": 8.0,
+      "data_aparitie": "2022-11-05",
+      "culoare": "Maro",
+      "medii_viata": "interior, exterior",
+      "hipoalergenic": false
+    },
+    {
+      "id": 3,
+      "nume": "Sphynx",
+      "descriere": "Pisică fără blană, ideală pentru alergici.",
+      "imagine": "sphynx.jpg",
+      "categorie": "Mica",
+      "comportament": "jucăușă",
+      "pret": 2500,
+      "greutate": 3.2,
+      "data_aparitie": "2023-05-22",
+      "culoare": "Roz",
+      "medii_viata": "interior",
+      "hipoalergenic": true
+    },
+    {
+      "id": 4,
+      "nume": "Persană",
+      "descriere": "Pisică cu blană lungă, extrem de elegantă.",
+      "imagine": "persana.jpg",
+      "categorie": "Medie",
+      "comportament": "calmă",
+      "pret": 1800,
+      "greutate": 4.8,
+      "data_aparitie": "2022-09-15",
+      "culoare": "Alb",
+      "medii_viata": "interior",
+      "hipoalergenic": false
+    },
+    {
+      "id": 5,
+      "nume": "Ragdoll",
+      "descriere": "Pisică relaxată, perfectă pentru copii.",
+      "imagine": "ragdoll.jpg",
+      "categorie": "Mare",
+      "comportament": "blândă",
+      "pret": 2200,
+      "greutate": 6.0,
+      "data_aparitie": "2023-01-03",
+      "culoare": "Crem",
+      "medii_viata": "interior",
+      "hipoalergenic": false
+    },
+    {
+      "id": 6,
+      "nume": "Bengaleză",
+      "descriere": "Pisică activă cu blană asemănătoare unui leopard.",
+      "imagine": "bengaleza.jpg",
+      "categorie": "Medie",
+      "comportament": "activă",
+      "pret": 2400,
+      "greutate": 5.2,
+      "data_aparitie": "2023-03-18",
+      "culoare": "Aurie",
+      "medii_viata": "interior, exterior",
+      "hipoalergenic": false
+    },
+    {
+      "id": 7,
+      "nume": "Scottish Fold",
+      "descriere": "Pisică cu urechi pliate, foarte prietenoasă.",
+      "imagine": "scottish.jpg",
+      "categorie": "Mica",
+      "comportament": "prietenoasă",
+      "pret": 1700,
+      "greutate": 4.0,
+      "data_aparitie": "2023-04-08",
+      "culoare": "Gri",
+      "medii_viata": "interior",
+      "hipoalergenic": false
+    }
+  ]
+}

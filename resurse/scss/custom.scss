@@ -6,10 +6,27 @@ $danger: #e74c3c;
 $body-bg: #d4ccf8;
 $body-color: #333;
 
+// Fonturi si dimensiuni
 $h1-font-size: 2.5rem;
 $h2-font-size: 2rem;
-$border-radius: 1rem;
 $font-family-base: 'Segoe UI', sans-serif;
+
+// Bordere si paddinguri
+$border-radius: 1rem;
+$btn-border-radius: 1rem;
+$btn-border-width: 2px;
+$input-border-radius: 1rem;
+$input-border-width: 2px;
+
+// range custom
+$form-range-thumb-width: 1.5rem; 
+$form-range-thumb-height: 1.5rem;
+$form-range-thumb-bg: $primary; 
+$form-range-track-bg: lighten($primary, 30%);
+// ---------------------------------------------------------
+
+$form-check-input-width: 1.3em;
+$form-check-input-border-radius: .5rem;
 
 $grid-breakpoints: (
   sm: 576px,
@@ -18,18 +35,114 @@ $grid-breakpoints: (
   xl: 1280px
 );
 
-$btn-padding-y: 1rem;
+// ------------------------------
+// Tema Light
+body {
+  background-color: $body-bg;
+  color: $body-color;
+}
 
-@use "bootstrap/scss/bootstrap" with (
-  $primary: $primary,
-  $success: $success,
-  $danger: $danger,
-  $body-bg: $body-bg,
-  $body-color: $body-color,
-  $h1-font-size: $h1-font-size,
-  $h2-font-size: $h2-font-size,
-  $border-radius: $border-radius,
-  $font-family-base: $font-family-base,
-  $grid-breakpoints: $grid-breakpoints,
-  $btn-padding-y: $btn-padding-y
-);
+.card-produs {
+  background-color: #a34454;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 10px #999;
+  padding: 1rem;
+}
+
+// ------------------------------
+// Tema dark
+body.dark {
+  background-color: #2e2640;
+  color: #eaeaea;
+}
+
+body.dark .card-produs {
+  background-color: #522e52;
+  color: white;
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea {
+  background-color: #2b2840;
+  color: white;
+  border-color: #555;
+}
+
+//  DARK RANGE
+body.dark input[type="range"]::-webkit-slider-thumb {
+  background-color: #ffcc00;
+}
+
+body.dark .btn {
+  background-color: #3b3a55;
+  color: white;
+  border-color: white;
+}
+
+body.dark header,
+body.dark nav,
+body.dark .dropdown-nav {
+  background-color: #2c2c2c;
+}
+
+body.dark .text-animat {
+  color: #f8f8f8;
+}
+
+// ------------------------------
+#art-produs {
+  background-color: #a34454;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 10px #999;
+  padding: 1rem;
+  color: white;
+}
+
+body:not(.dark) #art-produs {
+  background-color: #a34454;
+  color: white;
+}
+
+body.dark #art-produs {
+  background-color: #522e52;
+  color: white;
+}
+
+.navbar .form-switch {
+  scale: 0.9;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.navbar .form-check-label i {
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+//pag principala
+$box-light-color: #e38895; // roșu deschis pentru light mode
+$box-dark-color: #a34454;  // rosu mai închis pentru dark mode
+
+.zona {
+  background-color: $box-light-color;
+  border-radius: 1rem;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .zona {
+  background-color: $box-dark-color;
+  color: white;
+}
+
+body.dark .zona a,
+body.dark .zona p,
+body.dark .zona h2,
+body.dark .zona h3,
+body.dark .zona h4,
+body.dark .zona summary {
+  color: white;
+}
+

@@ -4,6 +4,21 @@ const express = require("express");
 const path = require("path");
 const sass = require("sass");
 
+const { Client } = require("pg");
+
+const client = new Client({
+    user: "pisici_user",
+    password: "admin123",
+    database: "pisici_site",
+    host: "localhost",
+    port: 5432
+});
+
+client.connect()
+    .then(() => console.log("✔ Conectat la PostgreSQL"))
+    .catch(err => console.error("❌ Eroare conectare PostgreSQL:", err));
+
+
 globalThis.folderScss = path.join(__dirname, "resurse", "scss");
 globalThis.folderCss = path.join(__dirname, "resurse", "css");
 
@@ -99,6 +114,13 @@ function genereazaImaginiRedimensionate(imagineNume, caleFolder) {
   }
 }
 
+function formatDate(data) {
+    const luni = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"];
+    const zile = ["Duminică", "Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă"];
+    const d = new Date(data);
+    return `${d.getDate()}-${luni[d.getMonth()]}-${d.getFullYear()} (${zile[d.getDay()]})`;
+}
+
 
 const app = express();
 
@@ -172,6 +194,22 @@ app.use((req, res, next) => {
 app.use("/resurse", express.static(path.join(__dirname, "resurse")));
 
 
+
+app.use(async (req, res, next) => {
+    try {
+        const rezultat_categorii = await client.query(`SELECT unnest(enum_range(NULL::categorie_mare))`);
+        res.locals.optiuni = rezultat_categorii.rows.map(c => c.unnest);
+    } catch (err) {
+        console.error("Eroare la preluarea optiunilor din enum:", err);
+        res.locals.optiuni = [];
+    }
+    next();
+});
+
+
+app.use("/resurse/imagini/galerie/small", express.static(path.join(__dirname, "resurse", "imagini", "galerie", "small")));
+app.use("/resurse/imagini/galerie/medium", express.static(path.join(__dirname, "resurse", "imagini", "galerie", "medium")));
+
 app.get(["/", "/index", "/home"], (req, res) => {
   res.render("pagini/index", { ip: req.ip });
 });
@@ -237,9 +275,76 @@ app.get("/galerie", (req, res) => {
   res.render("pagini/galerie", { imagini });
 });
 
+app.get("/produs/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  try {
+    const rezultat = await client.query("SELECT * FROM produse WHERE id = $1", [id]);
+    if (rezultat.rows.length === 0)
+      return res.status(404).render("pagini/eroare", { err: "Produsul nu există." });
 
-app.use("/resurse/imagini/galerie/small", express.static(path.join(__dirname, "resurse", "imagini", "galerie", "small")));
-app.use("/resurse/imagini/galerie/medium", express.static(path.join(__dirname, "resurse", "imagini", "galerie", "medium")));
+    const prod = rezultat.rows[0];
+
+    // formatăm data
+    const date = new Date(prod.data_aparitie);
+    const zile = ["Duminică", "Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă"];
+    const luni = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
+                  "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"];
+
+    prod.data_aparitie_form = `${date.getDate()}-${luni[date.getMonth()]}-${date.getFullYear()} (${zile[date.getDay()]})`;
+
+    res.render("pagini/produs", { prod });
+  } catch (err) {
+    console.log(err);
+    res.status(500).render("pagini/eroare", { err: "Eroare server." });
+  }
+});
+
+
+
+
+app.get("/produse/:categorie?", async (req, res) => {
+    const categorie = req.params.categorie;
+    let conditie = [];
+    let valori = [];
+
+    if (categorie && categorie !== "toate") {
+        conditie.push("categorie_mare = $1");
+        valori.push(categorie);
+    }
+
+    let query = "SELECT * FROM produse";
+    if (conditie.length > 0) {
+        query += " WHERE " + conditie.join(" AND ");
+    }
+
+    try {
+        const rezultate = await client.query(query, valori);
+        const produse = rezultate.rows;
+
+        for (let prod of produse) {
+            let d = new Date(prod.data_aparitie);
+            let zile = ["Duminică", "Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă"];
+            let luni = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"];
+            prod.data_aparitie_form = `${d.getDate()}-${luni[d.getMonth()]}-${d.getFullYear()} (${zile[d.getDay()]})`;
+
+            prod.categorie = prod.categorie_mare;
+        }
+
+        let enum_categorii = await client.query("SELECT unnest(enum_range(NULL::categorie_mare)) as cat");
+        let optiuni = enum_categorii.rows.map(c => c.cat);
+
+        res.render("pagini/produse", {
+            produse: produse,
+            categorie_selectata: categorie,
+            optiuni: optiuni
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).render("pagini/eroare", { err: "Eroare la interogare produse." });
+    }
+});
+
+
 
 
 app.get("/*", function (req, res) {

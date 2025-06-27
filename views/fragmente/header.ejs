@@ -28,7 +28,19 @@
             <li><a href="galerie-dinamica.html">Galerie dinamică</a></li>
           </ul>
         </li>
-        <li><a href="contact.html">Contact</a></li>
+        <li class="dropdown">
+  
+  <a href="/produse" class="nav-link">Produse</a>
+  <ul class="submenu-right">
+    <li><a href="/produse/toate">Toate</a></li>
+    <% if (typeof optiuni !== "undefined") { %>
+      <% for (let cat of optiuni) { %>
+        <li><a href="/produse/<%= cat %>"><%= cat %></a></li>
+      <% } %>
+    <% } %>
+  </ul>
+</li>
+
         <li><a href="/despre">Despre</a></li>
         <li><a href="/istoric">Istoric</a></li>
         <li><a href="/video">Video Pisici</a></li>
@@ -43,10 +55,20 @@
         <li><a href="#zona7">Întrebări frecvente</a></li>
       </ul>
     </li>
+    
+    <li class="nav-item d-flex align-items-center px-2">
+      <div class="form-check form-switch m-0">
+        <input class="form-check-input" type="checkbox" role="switch" id="switch-tema">
+        <label class="form-check-label ms-1" for="switch-tema">
+          <i class="bi bi-moon-stars-fill"></i> / <i class="bi bi-sun-fill"></i>
+        </label>
+      </div>
+    </li>
   </ul>
 </nav>
 
 <button id="burger" class="burger">
   <i class="fas fa-bars"></i>
 </button>
+
 </header>
