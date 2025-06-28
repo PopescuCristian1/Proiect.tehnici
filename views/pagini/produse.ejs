@@ -8,6 +8,7 @@
     <%- include("../fragmente/head.ejs") %>     
     <script type="text/javascript" src="/resurse/js/produse.js"></script>
     <script type="text/javascript" src="/resurse/js/produse-cos.js"></script>
+    <script type="text/javascript" src="/resurse/js/compare.js"></script>
 </head>
 <body>
 <header class="c1" id="titlu">
@@ -313,6 +314,10 @@
                                 <p class="descriere"><%- prod.descriere %></p>
                             </div>
                         </div>
+                        <div class="text-center mt-2">
+                        <button class="btn btn-primary btn-compare" data-id="<%= prod.id %>" data-nume="<%= prod.nume %>">Compară</button>
+                      </div>
+
                     </article>
                     <% } %>
                     <p id="mesaj-vid" class="text-center text-danger fw-bold mt-4" style="display:none;">

@@ -312,6 +312,7 @@ if (mesaj) {
 }
 marcheazaCeleMaiIeftineProduse();
 
+// La incarcarea paginii, seteaza nr initial de produse afisate
 const articoleInitiale = document.querySelectorAll(".grid-produse article");
 let totalInitial = 0;
 articoleInitiale.forEach(art => {

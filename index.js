@@ -569,6 +569,62 @@ for (let s of Object.values(seturi)) {
 });
 
 
+app.get("/comparare", async (req, res) => {
+    const id1 = req.query.id1;
+    const id2 = req.query.id2;
+
+    if (!id1 || !id2) {
+        return res.status(400).send("Lipsesc ID-urile produselor");
+    }
+
+    try {
+        const { Client } = require("pg");
+        const client = new Client({
+            user: "pisici_user",
+            password: "admin123",
+            database: "pisici_site",
+            host: "localhost",
+            port: 5432
+        });
+
+        await client.connect();
+
+        const result = await client.query(
+            `SELECT * FROM produse WHERE id IN ($1, $2) ORDER BY id`,
+            [id1, id2]
+        );
+
+        await client.end();
+
+        if (result.rows.length !== 2) {
+            return res.status(404).send("Unul sau ambele produse nu au fost găsite.");
+        }
+
+        const produs1 = result.rows[0];
+        const produs2 = result.rows[1];
+
+
+
+        if (typeof produs1.culoare === "string")
+            produs1.culoare = produs1.culoare.split(",").map(s => s.trim());
+
+        if (typeof produs2.culoare === "string")
+            produs2.culoare = produs2.culoare.split(",").map(s => s.trim());
+
+        res.render("pagini/comparare", {
+            produs1,
+            produs2
+        });
+
+    } catch (err) {
+        console.error("Eroare la interogare:", err);
+        res.status(500).send("Eroare server");
+    }
+});
+
+
+
+
 
 app.get("/*", function (req, res) {
   let numePagina = req.url.substring(1);

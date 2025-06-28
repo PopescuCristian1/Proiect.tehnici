@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparație Produse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resurse/css/style.css">
+    <link rel="stylesheet" href="/resurse/css/custom.css">
+</head>
+<body>
+    <h2 class="text-center mt-4">Comparație Produse</h2>
+
+<div class="container mt-4">
+  <table class="table table-bordered table-hover table-striped table-comparare">
+    <thead class="table-primary text-center">
+      <tr>
+        <th>Caracteristică</th>
+        <th><%= produs1.nume %></th>
+        <th><%= produs2.nume %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Preț</td>
+        <td><%= produs1.pret %> lei</td>
+        <td><%= produs2.pret %> lei</td>
+      </tr>
+      <tr>
+        <td>Greutate</td>
+        <td><%= produs1.greutate %> kg</td>
+        <td><%= produs2.greutate %> kg</td>
+      </tr>
+      <tr>
+        <td>Culoare</td>
+        <td><%= produs1.culoare %></td>
+        <td><%= produs2.culoare %></td>
+      </tr>
+      <tr>
+        <td>Categorie</td>
+        <td><%= produs1.categorie_mare %></td>
+        <td><%= produs2.categorie_mare %></td>
+      </tr>
+      <tr>
+        <td>Descriere</td>
+        <td><%= produs1.descriere %></td>
+        <td><%= produs2.descriere %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

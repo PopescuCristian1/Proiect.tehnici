@@ -166,3 +166,10 @@ main{
   margin-bottom: 0.5em;
   box-shadow: 0 0 5px #0005;
 }
+
+#container-comparare {
+  font-family: sans-serif;
+  font-size: 1rem;
+  background-color: #f0f0ff;
+  border-radius: 10px;
+}

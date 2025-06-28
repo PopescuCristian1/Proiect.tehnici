@@ -4,7 +4,9 @@
     <title><%= prod.nume %> - Detalii</title>
     <%- include("../fragmente/head.ejs") %>
     <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
-    <script defer src="/resurse/js/produse.js"></script>
+    <script type="text/javascript" src="/resurse/js/produse.js"></script>
+    <script type="text/javascript" src="/resurse/js/produse-cos.js"></script>
+    <script type="text/javascript" src="/resurse/js/compare.js"></script>
 
 </head>
 <body>
@@ -33,6 +35,10 @@
 
                 <p class="descriere"><b>Descriere:</b> <%= prod.descriere %></p>
             </article>
+            <div class="text-center mt-3">
+  <button class="btn btn-primary btn-compare" data-id="<%= prod.id %>" data-nume="<%= prod.nume %>">Compară</button>
+</div>
+
         </section>
         <% if (seturi && Object.keys(seturi).length > 0) { %>
 <section class="mt-5">
