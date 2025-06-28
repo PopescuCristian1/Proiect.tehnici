@@ -1,32 +1,26 @@
 {
   "oferte": [
     {
-      "categorie": "Mica",
-      "reducere": 10,
-      "ora-incepere": "00:00",
-      "ora-finalizare": "04:00"
-    },
-    {
       "categorie": "Mare",
-      "reducere": 15,
+      "reducere": 10,
       "ora-incepere": "04:00",
       "ora-finalizare": "08:00"
     },
     {
       "categorie": "Gigantica",
-      "reducere": 20,
+      "reducere": 40,
       "ora-incepere": "08:00",
       "ora-finalizare": "12:00"
     },
     {
       "categorie": "Medie",
-      "reducere": 25,
+      "reducere": 15,
       "ora-incepere": "12:00",
       "ora-finalizare": "16:00"
     },
     {
       "categorie": "Exotica",
-      "reducere": 30,
+      "reducere": 25,
       "ora-incepere": "16:00",
       "ora-finalizare": "20:00"
     }

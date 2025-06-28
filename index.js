@@ -419,7 +419,7 @@ try {
     const oraCurentaMin = acum.getHours() * 60 + acum.getMinutes();
 
     //ȘTERGEREA ofertelor expirate ===
-    const T2 = 1; 
+    const T2 = 24 * 60; // o zi
     const acumMinAbs = acum.getTime() / (1000 * 60);
 
     jsonOferte.oferte = jsonOferte.oferte.filter(oferta => {
